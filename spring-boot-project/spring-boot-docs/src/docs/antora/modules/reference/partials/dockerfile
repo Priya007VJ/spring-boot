@@ -1,3 +1,20 @@
+# Use an official Java runtime as a parent image
+FROM openjdk:11-jdk-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the JAR file from the target directory (adjust the filename based on your project)
+COPY target/my-springboot-app.jar app.jar
+
+# Make the JAR file executable
+RUN chmod +x app.jar
+
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+
+# Expose the port that your application runs on
+EXPOSE 8080
 # Perform the extraction in a separate builder container
 FROM bellsoft/liberica-openjre-debian:17-cds AS builder
 WORKDIR /builder
